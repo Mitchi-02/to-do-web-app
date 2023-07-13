@@ -1,7 +1,16 @@
-import { Schema, models, model} from "mongoose"; 
+import { Schema, models, model, Model} from "mongoose"; 
+import bcrypt from 'bcryptjs'
 
 
-const UserSchema = new Schema(
+interface IUser {
+  username: string
+  email: string
+  password: string
+}
+
+interface UserModel extends Model<IUser> { }
+
+const UserSchema = new Schema<IUser, UserModel>(
   {
     username: {
       type: String,
@@ -16,14 +25,18 @@ const UserSchema = new Schema(
       type: String,
       required: true,
     },
-    image: {
-      type: String,
-    },
   },
   { timestamps: true }
 )
 
-const User = models.User || model('User', UserSchema);
+UserSchema.pre('save', async function (next) {
+  const salt = await bcrypt.genSalt()
+  this.password = await bcrypt.hash(this.password, salt)
+  next()
+})
+
+const User: UserModel = models.User || model<IUser, UserModel>('User', UserSchema)
+
 
 
 export default User;

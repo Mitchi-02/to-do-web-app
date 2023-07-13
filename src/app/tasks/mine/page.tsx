@@ -1,15 +1,18 @@
-async function getTasks() {
-  const res = await fetch('/')
-  return res.json()
-}
+import { getTasksAction } from "@/actions"
+import TaskBoard from "@/components/TaskBoard"
 
-export default async function Page() {
-  // Wait for the promises to resolve
-  //const tasks = await getTasks()
-  
+
+export default async function Page({
+  searchParams,
+}: {
+  searchParams: { [key: string]: string | string[] | undefined }
+}) {  
+  const res = await getTasksAction()
+  if (!res?.tasks) {
+    throw new Error('something went wrong')
+  } 
+
   return (
-    <>
-      <h1>my tasks</h1>
-    </>
+    <TaskBoard tasks={res?.tasks} isStatus={ searchParams.mode!=="priority" }/>
   )
 }

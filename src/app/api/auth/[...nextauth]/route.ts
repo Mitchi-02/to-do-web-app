@@ -1,20 +1,15 @@
 import NextAuth from 'next-auth/next'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import bcrypt from 'bcrypt'
-import { User } from '@models'
-
-import { dbConnect } from '@utils'
-import { IUser } from '@types'
-import { AuthOptions } from 'next-auth'
+import bcrypt from 'bcryptjs'
+import { User } from '@/models'
+import { dbConnect } from '@/lib'
+import { AuthOptions, User as UserType } from 'next-auth'
 
 export const authOptions: AuthOptions = {
   providers: [
-    /* GoogleProvider({
-      clientId: process.env.GOOGLE_OAUTH_ID || '',
-      clientSecret: process.env.GOOGLE_OAUTH_SECRET || '',
-    }), */
     CredentialsProvider({
       name: 'Email and Password',
+      //@ts-ignore
       async authorize(credentials, req) {
         await dbConnect()
         const { email, password } = credentials as {
@@ -35,7 +30,12 @@ export const authOptions: AuthOptions = {
           throw new Error('Invalid credentials')
         }
 
-        return user
+        return {
+          name: user.username,
+          _id: user._id,
+          email: user.email,
+          username: user.username
+        }
       },
       //@ts-ignore
       credentials: undefined,
@@ -45,21 +45,16 @@ export const authOptions: AuthOptions = {
     strategy: 'jwt',
   },
   pages: {
-    signIn: '/auth/sign-in',
+    signIn: '/sign-in',
   },
   callbacks: {
     jwt: async ({ token, user }) => {
       user && (token.user = user)
-      console.log('jwt callback')
-
       return token
     },
     session: async ({ session, token }) => {
-      const user = token.user as IUser
-      console.log('session callback')
-
+      const user = token.user as UserType
       session.user = user
-
       return session
     },
   },

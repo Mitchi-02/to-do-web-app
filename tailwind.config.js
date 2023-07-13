@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
+  darkMode: 'class',
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
     './src/components/**/*.{js,ts,jsx,tsx,mdx}',
@@ -11,10 +12,13 @@ module.exports = {
         poppins: ['Poppins', 'sans-serif'],
       },
       colors: {
-        primaryOrange: '#FF5722',
+        primaryColor: 'var(--primary-color)',
+        secondaryColor: 'var(--secondary-color)',
+        thirdColor: 'var(--third-color)',
+        bgColor: 'var(--bg-color)',
+        primaryOrange: '#ff5722',
         primaryBlack: '#212121',
-        mainGrey: '#BFBFBF',
-        mainRed: '#B80000',
+        mainRed: '#ff4e4e',
         mainGreen: '#397B1A',
       },
     },
