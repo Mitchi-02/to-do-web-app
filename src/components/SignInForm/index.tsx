@@ -2,7 +2,6 @@
 
 import Input from '@/components/Input'
 import Button from '@/components/Button'
-import Link from 'next/link'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
