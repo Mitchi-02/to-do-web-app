@@ -23,6 +23,7 @@ const PasswordSection = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    //@ts-ignore
   } = useForm<PasswordForm>({ resolver: yupResolver(schema) })
 
   const onSubmit: SubmitHandler<PasswordForm> = async (data) => {

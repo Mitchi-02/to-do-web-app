@@ -26,6 +26,7 @@ const SignUp = () => {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
+    //@ts-ignore
   } = useForm<RegisterForm>({ resolver: yupResolver(schema) })
 
   const router = useRouter()

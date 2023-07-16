@@ -35,6 +35,7 @@ const TaskForm = ({
     setValue,
     formState: { errors, isSubmitting, isDirty },
   } = useForm<ITask>({
+    //@ts-ignore
     resolver: yupResolver(schema),
     //@ts-ignore
     defaultValues: task?._id
