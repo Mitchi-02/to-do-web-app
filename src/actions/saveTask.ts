@@ -1,7 +1,8 @@
 'use server'
 
 import { dbConnect, getSession } from '@/lib'
-import Task, { ITask } from '@/models/Task'
+import { Task } from '@/models'
+import { ITask } from '@/types'
 
 export default async function saveTask({ _id, ...rest}: ITask) {
   const session = await getSession()
