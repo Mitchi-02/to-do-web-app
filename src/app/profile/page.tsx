@@ -1,6 +1,12 @@
 import InfosSection from '@/components/Profile/InfosSection'
 import PasswordSection from '@/components/Profile/PasswordSection'
 import { getSession } from '@/lib'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Profile',
+  description: 'Taskify Profile Page.',
+}
 
 const Profile = async () => {
   const session = await getSession()

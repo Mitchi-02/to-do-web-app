@@ -1,6 +1,12 @@
 import createTask from '@/actions/createTask'
 import TaskForm from '@/components/TaskForm'
 import { ITask } from '@/types'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Create Task',
+  description: 'Taskify Create Task Page.',
+}
 
 const CreateTask = async ({
   searchParams,

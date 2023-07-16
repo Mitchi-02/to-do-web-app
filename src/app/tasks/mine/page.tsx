@@ -1,5 +1,11 @@
 import { getTasksAction } from "@/actions"
 import TaskBoard from "@/components/TaskBoard"
+import { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: 'My Tasks',
+  description: 'Taskify Tasks Page.',
+}
 
 export default async function Page({
   searchParams,

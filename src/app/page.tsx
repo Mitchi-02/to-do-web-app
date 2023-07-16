@@ -1,5 +1,11 @@
 import NavCard from '@/components/NavCard'
 import { getSession } from '@/lib'
+import { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Taskify',
+  description: 'The to do list app for the modern age.',
+}
 
 export default async function Home() {
   const session = await getSession()
@@ -18,7 +24,7 @@ export default async function Home() {
         </p>
       </section>
       {session && (
-        <section className='py-12 flex items-center justify-center gap-8'>
+        <section className='pt-12 flex items-center justify-center gap-8'>
           <NavCard
             image='/images/create.jpeg'
             link='/tasks/create'
