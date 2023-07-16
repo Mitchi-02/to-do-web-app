@@ -1,6 +1,6 @@
 'use client'
 
-import { ITask } from '@/models/Task'
+import { ITask } from '@/types'
 import { HTMLAttributes } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'

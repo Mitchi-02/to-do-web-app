@@ -1,7 +1,7 @@
 import { ObjectId } from "mongoose";
 
 export interface ITask {
-  _id?: ObjectId
+  _id: ObjectId
   title: string
   description: string
   deadline: string
