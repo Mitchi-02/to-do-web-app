@@ -3,7 +3,7 @@
 
 import { dbConnect, getSession } from '@/lib'
 import { Task } from '@/models'
-import { ITask } from '@/models/Task'
+import { ITask } from '@/types'
 
 export default async function createTask(task: ITask){
   const session = await getSession()
