@@ -41,7 +41,9 @@ const SignUp = () => {
       toast('error', res?.error)
     } else {
       toast('success', 'Account created successfully')
-      router.push('/profile')
+      setTimeout(() => {
+        router.push('/profile')
+      }, 2000)
     }
   }
 

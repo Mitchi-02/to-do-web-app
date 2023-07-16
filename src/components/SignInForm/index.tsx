@@ -34,7 +34,9 @@ const SignIn = () => {
       toast('error', res?.error)
     } else {
       toast('success', 'Logged in successfully')
-      router.push('/profile')
+      setTimeout(() => {
+        router.push('/profile')
+      }, 2000)
     }
   }
 

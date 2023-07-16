@@ -19,7 +19,7 @@ const schema = yup.object({
   deadline: yup.string().required(),
   status: yup.string().required(),
   priority: yup.string().required(),
-  labels: yup.array().of(yup.string()).min(1).required(),
+  labels: yup.array().of(yup.string()).min(1, 'Please select at least one label').required(),
 })
 
 const TaskForm = ({
@@ -56,7 +56,9 @@ const TaskForm = ({
       toast('error', res?.error)
     } else {
       toast('success', res?.message || '')
-      router.push('/tasks/mine')
+      setTimeout(() => {
+        router.push('/tasks/mine')
+      }, 2000)
     }
   }
   
