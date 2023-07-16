@@ -1,8 +1,8 @@
 import createTask from '@/actions/createTask'
 import TaskForm from '@/components/TaskForm'
-import { ITask } from '@/models/Task'
+import { ITask } from '@/types'
 
-const CreateTask = ({
+const CreateTask = async ({
   searchParams,
 }: {
   searchParams: { [key: string]: string | string[] | undefined }

@@ -10,13 +10,13 @@ const Header = () => {
   const { data: session } = useSession()
   return (
     <header className=' py-5 border-b text-mainBlack relative z-[1000]'>
-      <div className='flex justify-between items-center PageContainer'>
+      <div className='flex md:justify-between gap-6 items-center PageContainer'>
         <Link href='/' className='flex gap-2 items-center font-bold text-lg'>
           <Image src='/images/logo.svg' alt='Taskify' width={30} height={30} />
           <span className='hidden sm:inline'>Taskify</span>
         </Link>
-        <Navbar />
-        <div className='flex items-center gap-6'>
+        <Navbar className='order-3 md:order-2' />
+        <div className='flex items-center gap-6 order-2 md:order-3 ml-auto md:ml-0'>
           <DarkModeToggle />
           {session ? (
             <button

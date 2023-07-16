@@ -1,5 +1,16 @@
 import { ObjectId } from "mongoose";
 
+export interface ITask {
+  _id?: ObjectId
+  title: string
+  description: string
+  deadline: string
+  status: Status
+  priority: Priority
+  labels: Label[]
+  user_id?: ObjectId
+}
+
 export interface IUser {
     _id: ObjectId;
     email:string;

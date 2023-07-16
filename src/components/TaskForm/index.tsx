@@ -1,6 +1,6 @@
 'use client'
 
-import { ITask } from '@/models/Task'
+import { ITask } from '@/types'
 import { Label, statuses, priorities, labels } from '@/types'
 import Input from '@/components/Input'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -16,7 +16,7 @@ import { useRouter } from 'next/navigation'
 const schema = yup.object({
   title: yup.string().required(),
   description: yup.string().required(),
-  deadline: yup.date().required(),
+  deadline: yup.string().required(),
   status: yup.string().required(),
   priority: yup.string().required(),
   labels: yup.array().of(yup.string()).min(1).required(),
@@ -28,8 +28,7 @@ const TaskForm = ({
 }: {
   task?: ITask
   onSubmit: (data: ITask) => Promise<{ error?: string, message?: string }>
-}) => {  
-  
+}) => {    
   const {
     register,
     handleSubmit,
@@ -39,11 +38,10 @@ const TaskForm = ({
     resolver: yupResolver(schema),
     //@ts-ignore
     defaultValues: task?._id
-      ? { ...task, deadline: task.deadline.toISOString().slice(0, 10) }
+      ? task
       : {
           status: task?.status || 'to do',
           priority: task?.priority || 'low',
-          deadline: new Date().toISOString().slice(0, 10),
           labels: [],
         },
   })
@@ -51,7 +49,7 @@ const TaskForm = ({
   const [selectedLabels, setSelectedLabels] = useState<Label[]>(
     task?.labels || []
   )
-  const onSubmit: SubmitHandler<ITask> = async (data) => {    
+  const onSubmit: SubmitHandler<ITask> = async (data) => {  
     if (!isDirty) return
     const res = await submit(data)
     if (res?.error) {
@@ -61,7 +59,7 @@ const TaskForm = ({
       router.push('/tasks/mine')
     }
   }
-
+  
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}

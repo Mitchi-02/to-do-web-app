@@ -69,7 +69,6 @@ const SignIn = () => {
             Sign In
           </Button>
         </form>
-        <button className='button w-full'>Sign in with google</button>
         <div className='justify-center flex flex-wrap'>
           You don't have an account ?
           <Link

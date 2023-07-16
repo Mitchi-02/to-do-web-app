@@ -18,6 +18,7 @@ const Task = ({
   isStatus: boolean
   className?: string
 } & HTMLAttributes<HTMLDivElement>) => {
+  
   const priorityColor = {
     low: 'text-mainGreen',
     medium: 'text-yellow-700',
@@ -29,7 +30,7 @@ const Task = ({
     completed: 'text-mainGreen',
   }
   const deadlineColor =
-    task.deadline >= new Date() || task.status === 'completed'
+    new Date(task.deadline) >= new Date() || task.status === 'completed'
       ? 'text-mainGreen'
       : "text-mainRed after:content-['_!']"
   return (
@@ -62,11 +63,16 @@ const Task = ({
             {task.priority}
           </span>
         )}
-        <span className={`${deadlineColor} lg:hidden`}>
-          {task.deadline.toJSON().slice(0, 10).split('-').reverse().join('/')}
+        <span className={`${deadlineColor} hidden md:block lg:hidden`}>
+          {new Date(task.deadline)
+            .toJSON()
+            .slice(0, 10)
+            .split('-')
+            .reverse()
+            .join('/')}
         </span>
-        <span className={`${deadlineColor} hidden lg:block`}>
-          {task.deadline.toDateString()}
+        <span className={`${deadlineColor} md:hidden lg:block`}>
+          {new Date(task.deadline).toDateString()}
         </span>
       </div>
     </div>

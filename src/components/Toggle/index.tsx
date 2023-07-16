@@ -2,9 +2,9 @@
 
 import React, { HTMLAttributes } from 'react'
 
-const Toggle = ({ isChecked, handleToggle, ...rest }: { isChecked: boolean, handleToggle: () => void }& HTMLAttributes<HTMLLabelElement>) => {
+const Toggle = ({ isChecked, className, handleToggle, ...rest }: { isChecked: boolean, handleToggle: () => void }& HTMLAttributes<HTMLLabelElement>) => {
   return (
-    <label className='relative w-14 h-8' {...rest}>
+    <label className={className+' relative sm:w-14 sm:h-8 h-6 w-10'} {...rest}>
       <input
         checked={isChecked}
         onChange={handleToggle}

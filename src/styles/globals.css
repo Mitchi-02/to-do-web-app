@@ -156,7 +156,7 @@
 }
 
 .slider:before {
-  @apply absolute content-[''] h-6 w-6 top-1 left-1 bg-bgColor duration-500;
+  @apply absolute content-[''] h-4 w-4 sm:h-6 sm:w-6 top-1 left-1 bg-bgColor duration-500;
 }
 
 input:checked + .slider {
@@ -164,9 +164,7 @@ input:checked + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(24px);
-  -ms-transform: translateX(24px);
-  transform: translateX(24px);
+  @apply translate-x-4 sm:translate-x-6;
 }
 
 /* Rounded sliders */
@@ -176,4 +174,26 @@ input:checked + .slider:before {
 
 .slider.round:before {
   @apply rounded-full;
+}
+
+
+.skeleton {
+  background: #404040;
+  background: linear-gradient(110deg, #ececec 8%, #f5f5f5 18%, #ececec 33%);
+  border-radius: 5px;
+  background-size: 200% 100%;
+  -webkit-animation: 1.5s shine linear infinite;
+          animation: 1.5s shine linear infinite;
+}
+
+@-webkit-keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position-x: -200%;
+  }
 }

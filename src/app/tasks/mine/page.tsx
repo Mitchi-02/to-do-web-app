@@ -1,7 +1,6 @@
 import { getTasksAction } from "@/actions"
 import TaskBoard from "@/components/TaskBoard"
 
-
 export default async function Page({
   searchParams,
 }: {
@@ -9,9 +8,8 @@ export default async function Page({
 }) {  
   const res = await getTasksAction()
   if (!res?.tasks) {
-    throw new Error('something went wrong')
-  } 
-
+    throw new Error('Something went wrong')
+  }   
   return (
     <TaskBoard tasks={res?.tasks} isStatus={ searchParams.mode!=="priority" }/>
   )

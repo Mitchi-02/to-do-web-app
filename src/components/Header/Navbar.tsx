@@ -6,7 +6,7 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import { useState } from 'react'
 
-export default function () {
+export default function ({ className }: { className?: string }) {
   const [open, setOpen] = useState(false)
   const { data: session } = useSession()
   const pages = [
@@ -17,7 +17,7 @@ export default function () {
   const path = usePathname()
 
   return (
-    <nav>
+    <nav className={className || ''}>
       <button
         className='md:hidden flex items-center'
         onClick={() => setOpen(true)}
@@ -49,7 +49,7 @@ export default function () {
               key={page.href}
               className={`${page.href === path && 'text-primaryColor'}`}
             >
-              <Link href={page.href as any}>{page.title}</Link>
+              <Link onClick={() => setOpen(false)} href={page.href as any}>{page.title}</Link>
             </li>
           ))}
 

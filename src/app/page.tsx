@@ -1,7 +1,6 @@
 import NavCard from '@/components/NavCard'
 import { getSession } from '@/lib'
 
-
 export default async function Home() {
   const session = await getSession()
   return (

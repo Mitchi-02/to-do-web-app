@@ -1,16 +1,7 @@
-import { Label, Priority, Status } from '@/types'
-import { Schema, models, model, Model, ObjectId } from 'mongoose'
+import { ITask } from '@/types'
+import { Schema, models, model, Model } from 'mongoose'
 
-export interface ITask {
-  _id: ObjectId
-  title: string
-  description: string
-  deadline: Date
-  status: Status
-  priority: Priority
-  labels: Label[]
-  user_id?: ObjectId
-}
+
 
 interface TaskModel extends Model<ITask> {}
 
@@ -25,7 +16,7 @@ const TaskSchema = new Schema<ITask, TaskModel>(
       required: true,
     },
     deadline: {
-      type: Date,
+      type: String,
       required: true,
     },
     status: {

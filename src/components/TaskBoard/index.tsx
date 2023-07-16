@@ -1,6 +1,6 @@
 'use client'
 
-import { ITask } from '@/models/Task'
+import { ITask } from '@/types'
 import { priorities, statuses } from '@/types'
 import Image from 'next/image'
 import React, { useMemo, useState } from 'react'
@@ -17,7 +17,7 @@ const TaskBoard = ({
 }: {
   isStatus: boolean
   tasks: ITask[]
-}) => {
+}) => {  
   const [tasks, setTasks] = useState(tasksData)
   const [isStatus, setIsStatus] = useState(defaultStatus)
   const data = useMemo(() => (isStatus ? statuses : priorities), [isStatus])
@@ -36,9 +36,9 @@ const TaskBoard = ({
   }
   return (
     <>
-      <div className='flex pb-4 gap-8 items-center'>
-        <span className='text-xl font-semibold'>Sort By</span>
-        <div className='flex gap-4 items-center font-semibold'>
+      <div className='flex justify-between sm:justify-start pb-4 gap-4 sm:gap-8 items-center'>
+        <span className='text-lg sm:text-xl font-semibold'>Sort By</span>
+        <div className='flex gap-3 sm:gap-4 items-center font-semibold'>
           <span className={isStatus ? 'text-primaryColor' : ''}>Status</span>
           <Toggle isChecked={!isStatus} handleToggle={handleToggle} />
           <span className={!isStatus ? 'text-primaryColor' : ''}>Priority</span>
