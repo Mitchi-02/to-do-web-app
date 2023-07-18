@@ -1,21 +1,35 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextResponse } from "next/server"
+import { withAuth } from 'next-auth/middleware'
 
-export function middleware(request: NextRequest) {
-  const accessToken = request.cookies.get('next-auth.session-token')?.value
+export default withAuth(
+  function middleware(req) {
+    const pathname = req.nextUrl.pathname
+    if (
+      requireAuth.some((path) => pathname.startsWith(path)) &&
+      !req.nextauth.token
+    ) {
+      const url = new URL('/sign-in', req.url)
+      return NextResponse.redirect(url)
+    }
+    if (
+      requireGuest.some((path) => pathname.startsWith(path)) &&
+      req.nextauth.token
+    ) {
+      const url = new URL('/profile', req.url)
+      return NextResponse.redirect(url)
+    }
 
-  const pathname = request.nextUrl.pathname
-
-  if (requireAuth.some((path) => pathname.startsWith(path)) && !accessToken) {
-    const url = new URL('/sign-in', request.url)
-    return NextResponse.redirect(url)
+    return NextResponse.next()
+  },
+  {
+    callbacks: {
+      authorized({ req, token }) {
+        return true
+      },
+    },
   }
-  if(requireGuest.some((path) => pathname.startsWith(path)) && accessToken) {
-    const url = new URL('/profile', request.url)
-    return NextResponse.redirect(url)
-  }
+)
 
-  return NextResponse.next()
-}
 
 const requireAuth = ['/profile', '/tasks']
 const requireGuest = ['/sign-in', '/sign-up']
