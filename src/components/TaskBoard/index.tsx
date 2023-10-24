@@ -3,13 +3,14 @@
 import { ITask } from '@/types'
 import { priorities, statuses } from '@/types'
 import Image from 'next/image'
-import React, { useMemo, useState } from 'react'
+import React, { Fragment, useMemo, useState } from 'react'
 import Task from '../Task'
 import saveTask from '@/actions/saveTask'
 import Toggle from '../Toggle'
 import Link from 'next/link'
 import deleteTask from '@/actions/deleteTask'
 import { ObjectId } from 'mongoose'
+import DropArea from '../DropArea'
 
 const TaskBoard = ({
   isStatus: defaultStatus,
@@ -66,35 +67,38 @@ const TaskBoard = ({
               {item}
             </h2>
             <ul
-              className='mt-4 space-y-4 relative overflow-auto'
+              className='mt-4 relative overflow-auto'
               style={{
                 maxHeight: 64 * 4 + 16 * 3 + 'px',
               }}
             >
+              <DropArea />
               {tasks
                 .filter((t) => t[accessor] === item)
                 .map((t) => (
-                  <li
-                    key={JSON.stringify(t._id)}
-                    draggable
-                    onDragStart={(e) => {
-                      e.dataTransfer.setData('Text', JSON.stringify(t))
-                      e.currentTarget.classList.add('absolute')
-                    }}
-                    onDragEnd={(e) => {
-                      e.currentTarget.classList.remove('absolute')
-                    }}
-                    className='w-full'
-                  >
-                    <Task
-                      handleDelete={(id: ObjectId) => {
-                        deleteTask(id)
-                        setTasks(tasks.filter((t) => t._id !== id))
+                  <Fragment key={JSON.stringify(t._id)}>
+                    <li
+                      draggable
+                      onDragStart={(e) => {
+                        e.dataTransfer.setData('Text', JSON.stringify(t))
+                        //e.currentTarget.classList.add('absolute')
                       }}
-                      task={t}
-                      isStatus={isStatus}
-                    />
-                  </li>
+                      onDragEnd={(e) => {
+                        //e.currentTarget.classList.remove('absolute')
+                      }}
+                      className='w-full cursor-grab active:cursor-grabbing active:animate-pulse'
+                    >
+                      <Task
+                        handleDelete={(id: ObjectId) => {
+                          deleteTask(id)
+                          setTasks(tasks.filter((t) => t._id !== id))
+                        }}
+                        task={t}
+                        isStatus={isStatus}
+                      />
+                    </li>
+                    <DropArea />
+                  </Fragment>
                 ))}
             </ul>
             <Link

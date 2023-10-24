@@ -36,7 +36,7 @@ const Task = ({
   return (
     <div
       {...rest}
-      className={`bg-bgColor text-sm py-3 px-4 rounded-xl shadow space-y-3 cursor-pointer capitalize max-h- ' ${
+      className={`bg-bgColor text-sm py-3 px-4 rounded-xl shadow space-y-3 capitalize ' ${
         className || ''
       }`}
     >
