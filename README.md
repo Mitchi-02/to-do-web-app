@@ -1,5 +1,7 @@
 # Taskify
 
+A full stack app for to do list, built with NextJS 13 and server actions.
+
 ## Getting started
 
 Don't forget to fill your env file with env variables.
