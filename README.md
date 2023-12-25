@@ -1,6 +1,6 @@
 # Taskify
 
-A full stack app for to do list, built with NextJS 13 and server actions.
+A full stack app for to do list, built with NextJS 13 and server actions. It handles user authentication and tasks CRUD.
 
 ## Getting started
 
